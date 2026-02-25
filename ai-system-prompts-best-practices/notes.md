@@ -155,3 +155,13 @@ Fetched and analyzed raw system prompt text from 13+ tools in parallel:
 8. **Example-driven behavioral steering** (few-shot examples in prompts)
 9. **Planning-before-execution** patterns everywhere
 10. **Anti-verbosity and anti-preamble rules** are standard
+
+## Follow-up: RAG vs Grep/Tool-Calling Analysis (2026-02-25)
+
+Investigated how each tool fetches codebase context. Two dominant strategies emerged:
+
+**Hybrid RAG (9 tools):** Cursor IDE, Windsurf, Copilot, Trae, Augment Code, Devin, Google Antigravity, Replit, Kiro -- all expose a `codebase_search` or `semantic_search` tool backed by an embedding index, plus grep for precise lookups.
+
+**Tool-call only (7 tools):** Claude Code, Cursor CLI, Codex CLI, Cline, v0, Junie, Manus -- no embedding index; the LLM orchestrates grep/glob/file-read calls at runtime.
+
+Key evidence: Cursor ships two different prompts -- IDE says "Semantic search is your MAIN exploration tool" while CLI says "Grep search is your MAIN exploration tool." The split is infrastructure-driven (persistent indexer availability), not architectural preference. All open-source tools fall in the tool-call-only category.
