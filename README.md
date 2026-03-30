@@ -170,7 +170,31 @@ for dirname, _ in subdirs_with_dates:
             readme_path.write_text('\n'.join(new_lines))
 
 ]]]-->
-## 1 research projects
+## 3 research projects
+
+### [context-fetching-analysis](https://github.com/ecarrara/research/tree/main/context-fetching-analysis) (2026-02-25)
+
+Analyzing system prompts from over 16 AI coding tools (see [x1xhlol/system-prompts-and-models-of-ai-tools](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools)), the research reveals two main approaches for codebase context retrieval: tools either pre-fetch context using Retrieval-Augmented Generation (RAG) and embeddings, or rely on runtime tool calls (like grep, glob, and file reads) for discovery. IDE-based commercial tools (such as Cursor, Windsurf, Trae, Augment, Copilot) predominantly use a hybrid method, integrating semantic search via codebase embedding indexes alongside traditional grep, with supplementary context injection (e.g., open files, cursor position). In contrast, CLI and open-source tools (like Claude Code, Codex CLI, Cline) rely on runtime tool calls, lacking semantic search or codebase indexing. Google Antigravity uniquely blends hybrid retrieval with pre-fetched, distilled Knowledge Items to inject context. Notably, the distinction is clearest in Cursor’s split: IDE mode uses semantic search as primary, while CLI mode defaults to grep, underscoring infrastructural limits in CLI environments.
+
+**Key Findings:**
+- IDE tools favor embedding-based semantic search due to persistent indexing infrastructure; CLI tools default to grep for efficiency.
+- Commercial tools converge on hybrid retrieval, combining semantic, regex, and metadata injection.
+- Open-source tools (e.g. [Cline](https://github.com/x1xhlol/Cline)) implement only runtime tool calls and regex/text search.
+- Context injection (e.g., open files, Knowledge Items) is a distinct architectural feature beyond RAG and tool-calling.
+- Agent-wrapped search (Amp, v0) offers intelligent orchestration without embeddings, relying on runtime tool combination.
+
+### [ai-system-prompts-best-practices](https://github.com/ecarrara/research/tree/main/ai-system-prompts-best-practices) (2026-02-24)
+
+A cross-tool review of production AI coding assistants, leveraging the [system-prompts-and-models-of-ai-tools](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools) repository, identifies 15 best practices in prompt design by comparing over a dozen live system prompts ranging from IDE agents to autonomous OS-level tools. The study finds that robust structure (with clear section delimiters), example-driven guidance, and multi-layered safety rules are universal, while prompt length depends more on platform specificity than quality. Dynamic prompt assembly, planning before execution, precise context management, and explicit anti-verbosity techniques are standard. Notably, context retrieval divides into RAG-driven semantic search for IDE tools and runtime tool-calling for CLI agents. Findings are reinforced by observed prompt variants for specific models, highlighting the necessity of adapting prompt engineering to model idiosyncrasies and deployment environment.
+
+**Key Findings:**
+- Prompt length tracks platform specificity, not output quality.
+- Safety strategies are multi-layered: prompt guardrails, approval gates, and infrastructure.
+- Most critical challenge: minimizing redundant context fetching.
+- "Think-before-act" planning protocols are becoming standard.
+- Runtime prompt templating is now common practice.
+- Tools combat verbosity with examples, anti-pattern bans, and explicit constraints.
+- Context retrieval split: IDE agents use RAG-augmented search; CLI agents rely on iterative tool-calling.
 
 ### [agent-experience-research](https://github.com/ecarrara/research/tree/main/agent-experience-research) (2026-02-02)
 

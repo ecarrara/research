@@ -1,0 +1,8 @@
+Analyzing system prompts from over 16 AI coding tools (see [x1xhlol/system-prompts-and-models-of-ai-tools](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools)), the research reveals two main approaches for codebase context retrieval: tools either pre-fetch context using Retrieval-Augmented Generation (RAG) and embeddings, or rely on runtime tool calls (like grep, glob, and file reads) for discovery. IDE-based commercial tools (such as Cursor, Windsurf, Trae, Augment, Copilot) predominantly use a hybrid method, integrating semantic search via codebase embedding indexes alongside traditional grep, with supplementary context injection (e.g., open files, cursor position). In contrast, CLI and open-source tools (like Claude Code, Codex CLI, Cline) rely on runtime tool calls, lacking semantic search or codebase indexing. Google Antigravity uniquely blends hybrid retrieval with pre-fetched, distilled Knowledge Items to inject context. Notably, the distinction is clearest in Cursor’s split: IDE mode uses semantic search as primary, while CLI mode defaults to grep, underscoring infrastructural limits in CLI environments.
+
+**Key Findings:**
+- IDE tools favor embedding-based semantic search due to persistent indexing infrastructure; CLI tools default to grep for efficiency.
+- Commercial tools converge on hybrid retrieval, combining semantic, regex, and metadata injection.
+- Open-source tools (e.g. [Cline](https://github.com/x1xhlol/Cline)) implement only runtime tool calls and regex/text search.
+- Context injection (e.g., open files, Knowledge Items) is a distinct architectural feature beyond RAG and tool-calling.
+- Agent-wrapped search (Amp, v0) offers intelligent orchestration without embeddings, relying on runtime tool combination.
